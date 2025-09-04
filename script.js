@@ -1,217 +1,155 @@
-// --- Global State and Utility Functions ---
-let waveTips = []; 
-let waverData = [
-    { id: 1, name: 'Waver 1', team: 'Team: Elite Waves', origin: 'Origin: Los Angeles, CA' },
-    { id: 2, name: 'Waver 2', team: 'Team: The Wave Gods', origin: 'Origin: New York, NY' },
-    { id: 3, name: 'Waver 3', team: 'Team: Crown Control', origin: 'Origin: Atlanta, GA' },
-    { id: 4, name: 'Waver 4', team: 'Team: The Gauntlet', origin: 'Origin: Houston, TX' },
-    { id: 5, name: 'Waver 5', team: 'Team: Wave Chasers', origin: 'Origin: Chicago, IL' },
-    { id: 6, name: 'Waver 6', team: 'Team: Master Combers', origin: 'Origin: Miami, FL' },
-    { id: 7, name: 'Waver 7', team: 'Team: Spiral Kings', origin: 'Origin: Washington, DC' },
-    { id: 8, name: 'Waver 8', team: 'Team: The Unravelers', origin: 'Origin: Philadelphia, PA' },
-    { id: 9, name: 'Waver 9', team: 'Team: Deep Tides', origin: 'Origin: Dallas, TX' },
-    { id: 10, name: 'Waver 10', team: 'Team: The Monarchs', origin: 'Origin: Oakland, CA' }
-];
-
-function openModal(id) {
-    document.getElementById(id).classList.remove('hidden');
-    document.getElementById(id).classList.add('active');
-}
-
-function closeModal(id) {
-    document.getElementById(id).classList.add('hidden');
-    document.getElementById(id).classList.remove('active');
-}
-
+// Function to show a toast notification
 function showToast(message) {
-    const toast = document.getElementById('toast-notification');
-    toast.textContent = message;
-    toast.classList.add('show');
-    setTimeout(() => {
-        toast.classList.remove('show');
-    }, 3000);
+  const toast = document.getElementById('toast-notification');
+  toast.textContent = message;
+  toast.classList.add('show');
+  setTimeout(() => {
+    toast.classList.remove('show');
+  }, 3000);
 }
 
-// --- Mobile Menu ---
-const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-const mobileMenu = document.getElementById('mobile-menu');
+// Function to handle the AI question form
+document.getElementById('main-ask-guru-form').addEventListener('submit', function(event) {
+  event.preventDefault();
+  const questionInput = document.getElementById('main-ai-question');
+  const responseContainer = document.getElementById('main-ai-response-container');
+  const responseText = document.getElementById('main-ai-response');
+  const loadingIndicator = document.getElementById('main-ai-loading-indicator');
 
-mobileMenuBtn.addEventListener('click', () => {
-    mobileMenu.classList.toggle('hidden');
+  const question = questionInput.value.trim();
+  if (question === '') {
+    showToast('Please ask a question first!');
+    return;
+  }
+
+  // Hide previous response and show loading indicator
+  responseContainer.classList.add('hidden');
+  loadingIndicator.classList.remove('hidden');
+
+  // Simulated AI responses for demonstration
+  const aiResponses = [
+    "To achieve a flawless crown, focus your brushing on a single point and brush outwards in a circular motion. This trains the hair to lay down in a neat, spinning pattern.",
+    "Eliminating forks requires brushing from multiple angles and consistently. Identify the point where your waves separate and make sure you're brushing through that spot at least 50 times in each session.",
+    "For more shine, moisturize your hair daily with a lightweight pomade or oil. Brushing with a soft brush as a finisher also helps distribute natural oils and create a glossy finish.",
+    "To fix frizzy waves, you must maintain consistent compression. Wear your durag tightly and correctly, even when just lounging at home. A moisturized scalp and regular brushing with a soft brush can also help.",
+    "Wolfing is the process of growing your hair out for a longer period (usually 4-12 weeks) without cutting it. This allows your waves to get deeper and more defined, but requires diligent brushing."
+  ];
+
+  // Simulate a delay for the AI to "think"
+  setTimeout(() => {
+    // Select a random response from the array
+    const randomIndex = Math.floor(Math.random() * aiResponses.length);
+    const answer = aiResponses[randomIndex];
+
+    // Hide loading indicator and display the new response
+    loadingIndicator.classList.add('hidden');
+    responseText.textContent = answer;
+    responseContainer.classList.remove('hidden');
+    questionInput.value = ''; // Clear the input field
+  }, 2000); // 2-second delay
 });
 
-// --- Ask Guru AI (Main Section) ---
-const mainAskGuruForm = document.getElementById('main-ask-guru-form');
-const mainAiQuestionInput = document.getElementById('main-ai-question');
-const mainAiResponseContainer = document.getElementById('main-ai-response-container');
-const mainAiResponseDiv = document.getElementById('main-ai-response');
-const mainAiLoadingIndicator = document.getElementById('main-ai-loading-indicator');
 
-// This entire block has been updated with the correct API information.
-mainAskGuruForm.addEventListener('submit', async function(e) {
-    e.preventDefault();
-    const question = mainAiQuestionInput.value.trim();
-    if (question === '') {
-        return;
-    }
+// Function for the wave routine form
+document.getElementById('wave-routine-form').addEventListener('submit', function(event) {
+  event.preventDefault();
+  const stage = document.getElementById('wave-stage').value;
+  const hairType = document.getElementById('hair-type').value;
+  const waveGoal = document.getElementById('wave-goal').value;
+  const desiredPattern = document.getElementById('desired-pattern').value;
 
-    mainAiLoadingIndicator.classList.remove('hidden');
-    mainAiResponseContainer.classList.add('hidden');
+  const routineResponseDiv = document.getElementById('routine-response');
+  const routineContainer = document.getElementById('routine-response-container');
+  const routineLoading = document.getElementById('routine-loading-indicator');
+  
+  routineContainer.classList.add('hidden');
+  routineLoading.classList.remove('hidden');
 
-    // **API Key from your console**
-    const apiKey = 'AIzaSyDZVzNeFqZFznLWiSHlplGCrNo8o1cs91I'; 
-    
-    // **API Endpoint from your curl command**
-    const apiUrl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
+  const routines = {
+    'Beginner-Coarse/Thick': `**Routine for Beginners with Coarse Hair:** Brush for 30 minutes a day with a **Hard Bristle Brush**. Use a moisturizing pomade and wear a durag at night.`,
+    'Beginner-Medium': `**Routine for Beginners with Medium Hair:** Brush for 20 minutes a day with a **Medium Bristle Brush**. Apply a leave-in conditioner and always wear a durag at night.`,
+    'Beginner-Fine/Soft': `**Routine for Beginners with Fine Hair:** Brush for 15 minutes a day with a **Soft Bristle Brush**. Use a light oil to prevent breakage and wear a durag at night.`,
+    'Advanced-Deeper Waves': `**Advanced Routine for Deeper Waves:** It's time to start wolfing! Brush for 45 minutes a day with a **Hard Bristle Brush**. You may want to try our new **Whip Shampoo** to keep your scalp clean during longer wolfing sessions.`,
+    'Intermediate-Forks': `**Intermediate Routine to Fix Forks:** Focus on your problem areas. Isolate the forks and brush them at multiple angles with a **Medium Bristle Brush**. Do extra brush sessions on those spots.`,
+    'Advanced-Shine': `**Advanced Routine for More Shine:** Finish every brush session with a **Soft Bristle Brush**. Apply a few drops of our natural oil blend (coming soon!) and lay down with a silky durag for maximum gloss.`
+  };
 
-    try {
-        const response = await fetch(apiUrl, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                // The API key is passed in the header, as shown in the curl command.
-                'X-goog-api-key': apiKey
-            },
-            body: JSON.stringify({
-                // The request body matches the format required by the Gemini API.
-                contents: [{
-                    parts: [{
-                        text: question
-                    }]
-                }]
-            })
-        });
+  const routineKey = `${stage}-${waveGoal}`; // Simplified key for demonstration
+  const routine = routines[routineKey] || routines['Beginner-Medium']; // Fallback routine
 
-        if (!response.ok) {
-            // Log the full error to the console for easier debugging
-            const errorDetails = await response.text();
-            console.error('API request failed:', response.status, errorDetails);
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        
-        // This is the correct path to extract the text from the Gemini API response.
-        const aiResponse = data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts && data.candidates[0].content.parts[0] ? data.candidates[0].content.parts[0].text : "No response found.";
-
-        mainAiResponseDiv.textContent = aiResponse;
-
-    } catch (error) {
-        mainAiResponseDiv.textContent = `Sorry, an error occurred: ${error.message}. Please check the console for details.`;
-        console.error('Error fetching data from API:', error);
-
-    } finally {
-        mainAiLoadingIndicator.classList.add('hidden');
-        mainAiResponseContainer.classList.remove('hidden');
-    }
+  setTimeout(() => {
+    routineLoading.classList.add('hidden');
+    routineResponseDiv.innerHTML = `<h3 class="text-xl font-bold text-center mb-4">Your Custom Routine:</h3>` + `<div class="p-4 bg-gray-800 rounded-lg">${routine}</div>`;
+    routineContainer.classList.remove('hidden');
+  }, 2000);
 });
 
-// --- Wave Journey Planner ---
-const journeyForm = document.getElementById('wave-routine-form');
-const routineLoadingIndicator = document.getElementById('routine-loading-indicator');
-const routineResponseContainer = document.getElementById('routine-response-container');
-const routineResponseDiv = document.getElementById('routine-response');
 
-journeyForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    routineLoadingIndicator.classList.remove('hidden');
-    routineResponseContainer.classList.add('hidden');
+// Function to handle community tips
+document.getElementById('wave-tip-form').addEventListener('submit', function(event) {
+  event.preventDefault();
+  const nameInput = document.getElementById('community-name');
+  const tipInput = document.getElementById('wave-content');
+  const tipsDisplay = document.getElementById('community-tips-display');
+  const noTipsMessage = document.getElementById('no-tips-message');
 
-    const stage = document.getElementById('wave-stage').value;
-    const hairType = document.getElementById('hair-type').value;
-    const goal = document.getElementById('wave-goal').value;
-    const pattern = document.getElementById('desired-pattern').value;
+  const name = nameInput.value.trim();
+  const tip = tipInput.value.trim();
 
-    setTimeout(() => {
-        let brushRecommendation = "a Medium Bristle Brush";
-        if (hairType === "Coarse/Thick") {
-            brushRecommendation = "a Hard Bristle Brush";
-        } else if (hairType === "Fine/Soft") {
-            brushRecommendation = "a Soft Bristle Brush";
-        }
+  if (name === '' || tip === '') {
+    showToast('Please fill out both fields!');
+    return;
+  }
 
-        const routineResponse = `
-            <h4 class="text-xl font-bold text-cyan-400">Your Guru Routine for ${pattern}:</h4>
-            <p>Based on your current stage as a <strong>${stage}</strong> with <strong>${hairType}</strong> hair, here is your personalized plan:</p>
-            <ol class="list-decimal list-inside mt-4 space-y-2 text-gray-200">
-                <li><strong>Daily Brushing:</strong> Use ${brushRecommendation} for at least 30 minutes a day, divided into sessions. Consistent, even strokes are vital for your ${pattern} pattern.</li>
-                <li><strong>Washing:</strong> Wash your hair once a week with a moisturizing, sulfate-free shampoo. Brush with the shampoo in your hair to lay it down.</li>
-                <li><strong>Compression:</strong> A durag or wave cap is your best friend. Wear it at all times when not brushing, especially at night.</li>
-                <li><strong>Moisturizing:</strong> Apply a small amount of pomade or shea butter to keep your waves laid and healthy.</li>
-            </ol>
-            <p class="mt-4 italic">Remember, "Rome wasn't built in a day." Your goal of "${goal}" is achievable with dedication!</p>
-        `;
-        routineResponseDiv.innerHTML = routineResponse;
-        routineLoadingIndicator.classList.add('hidden');
-        routineResponseContainer.classList.remove('hidden');
-    }, 2000);
+  // Create new tip element
+  const newTip = document.createElement('div');
+  newTip.classList.add('p-6', 'rounded-lg', 'bg-gray-800', 'shadow-lg');
+  newTip.innerHTML = `<p class="font-bold text-cyan-400 mb-2">${name}:</p><p class="text-gray-200">${tip}</p>`;
+
+  // Add tip to the display and show message if needed
+  tipsDisplay.prepend(newTip);
+  noTipsMessage.classList.add('hidden');
+
+  // Clear form inputs
+  nameInput.value = '';
+  tipInput.value = '';
+
+  showToast('Your wisdom has been shared!');
 });
 
-// --- Community Section ---
-const waveTipForm = document.getElementById('wave-tip-form');
-const communityTipsDisplay = document.getElementById('community-tips-display');
-const noTipsMessage = document.getElementById('no-tips-message');
+// Simple Modal Logic (for Waver Hall of Fame)
+function showWaverDetails(waverId) {
+    const waverData = {
+        1: { name: 'Waver 1', team: 'Team: Elite Waves', origin: 'Origin: Miami, FL' },
+        2: { name: 'Waver 2', team: 'Team: The Wave Gods', origin: 'Origin: Los Angeles, CA' },
+        3: { name: 'Waver 3', team: 'Team: Crown Control', origin: 'Origin: New York, NY' },
+        4: { name: 'Waver 4', team: 'Team: The Gauntlet', origin: 'Origin: Chicago, IL' },
+        5: { name: 'Waver 5', team: 'Team: Wave Chasers', origin: 'Origin: London, UK' },
+        6: { name: 'Waver 6', team: 'Team: Master Combers', origin: 'Origin: Atlanta, GA' },
+        7: { name: 'Waver 7', team: 'Team: Spiral Kings', origin: 'Origin: Houston, TX' },
+        8: { name: 'Waver 8', team: 'Team: The Unravelers', origin: 'Origin: Paris, FR' },
+        9: { name: 'Waver 9', team: 'Team: Deep Tides', origin: 'Origin: Toronto, CAN' },
+        10: { name: 'Waver 10', team: 'Team: The Monarchs', origin: 'Origin: Berlin, DE' }
+    };
 
-waveTipForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    const name = document.getElementById('community-name').value;
-    const content = document.getElementById('wave-content').value;
-
-    const newTip = { name, content };
-    waveTips.push(newTip);
-    localStorage.setItem('waveTips', JSON.stringify(waveTips));
-
-    displayTips();
-    waveTipForm.reset();
-    showToast('Wisdom submitted successfully! 🙏');
-});
-
-function displayTips() {
-    communityTipsDisplay.innerHTML = ''; 
-    if (waveTips.length === 0) {
-        noTipsMessage.style.display = 'block';
-    } else {
-        noTipsMessage.style.display = 'none';
-        waveTips.forEach(tip => {
-            const tipCard = document.createElement('div');
-            tipCard.className = 'card text-left';
-            tipCard.innerHTML = `
-                <h4 class="text-xl font-bold text-cyan-400 mb-2">${tip.name}</h4>
-                <p class="text-gray-300 italic mb-2">shared this wisdom:</p>
-                <p class="text-gray-200">${tip.content}</p>
-            `;
-            communityTipsDisplay.appendChild(tipCard);
-        });
-    }
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    const storedTips = localStorage.getItem('waveTips');
-    if (storedTips) {
-        waveTips = JSON.parse(storedTips);
-    }
-    displayTips();
-});
-
-// --- The Gauntlet Section ---
-function showWaverDetails(id) {
-    const waver = waverData.find(w => w.id === id);
-    if (!waver) return;
-
+    const waver = waverData[waverId];
     document.getElementById('waverName').textContent = waver.name;
     document.getElementById('waverTeam').textContent = waver.team;
     document.getElementById('waverOrigin').textContent = waver.origin;
-    openModal('waverModal');
+    document.getElementById('waverModal').classList.remove('hidden');
 }
 
-window.openModal = openModal;
-window.closeModal = closeModal;
-window.showWaverDetails = showWaverDetails;
+function closeModal(modalId) {
+    document.getElementById(modalId).classList.add('hidden');
+}
 
-// --- Product Purchase Section ---
+// Purchase function for products
 function purchaseBrush(productName) {
-    const message = `${productName} added to cart! 🛒`;
-    showToast(message);
+    showToast(`${productName} added to your cart!`);
 }
 
-window.purchaseBrush = purchaseBrush;
+// Mobile menu toggle
+document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileMenu.classList.toggle('hidden');
+});
