@@ -1,52 +1,142 @@
-.modal {
+/* Base Styles */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #0d1117;
+    color: #c9d1d9;
+}
+
+/* Card Styles */
+.card {
+    background-color: #161b22;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid #30363d;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* Button Styles */
+.btn-primary {
+    background-color: #0891b2;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    transition: background-color 0.2s;
+}
+
+.btn-primary:hover {
+    background-color: #0e7490;
+}
+
+/* Input and Select Field Styles */
+.input-field {
+    background-color: #0d1117;
+    border: 1px solid #30363d;
+    border-radius: 0.5rem;
+    padding: 0.75rem;
+    color: #c9d1d9;
+    width: 100%;
+}
+
+select.input-field {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg fill="%23c9d1d9" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 1.5em;
+    padding-right: 2.5rem;
+}
+
+/* Modal Styles */
+.modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.75);
+    background: rgba(0, 0, 0, 0.8);
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
 }
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
 .modal-content {
-    background-color: #2d3748;
+    background-color: #161b22;
     padding: 2rem;
-    border-radius: 8px;
-    max-width: 500px;
+    border-radius: 0.75rem;
     width: 90%;
+    max-width: 500px;
     position: relative;
+    transform: translateY(-20px);
+    transition: transform 0.3s ease;
+    border: 1px solid #30363d;
 }
-.hidden {
-    display: none;
+
+.modal-overlay.active .modal-content {
+    transform: translateY(0);
 }
-.toast {
+
+/* Toast Styles */
+#toast-notification {
     position: fixed;
-    bottom: 20px;
+    bottom: 2rem;
     left: 50%;
     transform: translateX(-50%);
-    background-color: #4a5568;
+    background-color: #0891b2;
     color: white;
     padding: 1rem 2rem;
-    border-radius: 8px;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     z-index: 2000;
-    transition: opacity 0.5s ease-in-out;
     opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
 }
-.toast.show {
+
+#toast-notification.show {
     opacity: 1;
+    visibility: visible;
 }
-.mobile-menu-link {
-    transition: color 0.3s ease;
+
+/* Utility/Layout Classes (Based on Tailwind) */
+.container {
+    max-width: 1280px; /* Equivalent to md:max-w-7xl */
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
 }
-.mobile-menu-link:hover {
-    color: #48bb78; /* Green hover for links */
+
+/* Responsive Grid and Flexbox for various sections */
+.grid {
+    display: grid;
+    gap: 2rem;
 }
-.loading-indicator {
-    animation: pulse 1.5s infinite;
-}
-@keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: .5; }
+
+@media (min-width: 768px) {
+    .md\:grid-cols-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .md\:grid-cols-3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .md\:grid-cols-5 {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
 }
