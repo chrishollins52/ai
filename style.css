@@ -1,35 +1,81 @@
+/* -- Root Variables: Refined for More Depth -- */
 :root {
-    --bg-color: #0b0c10;
-    --text-primary: #e0e0e0;
-    --glow-cyan: #00ffff;
-    --glow-fuchsia: #ff00ff;
-    --glow-blue: #007bff;
+    --bg-color: #05050a; /* Darker, almost black */
+    --text-primary: #e6f0ff; /* Soft, cool white */
+    --glow-cyan: #00e5e5; /* Brighter, more vibrant cyan */
+    --glow-fuchsia: #e500e5; /* Brighter, more vibrant fuchsia */
+    --glow-blue: #0066ff; /* A deeper, electric blue */
+    --glow-purple: #8a2be2; /* Introducing a complementary purple */
 }
 
+/* -- Global Styles: Creating an Immersive Canvas -- */
 body {
     font-family: 'Orbitron', sans-serif;
     scroll-behavior: smooth;
     background-color: var(--bg-color);
     color: var(--text-primary);
-    background-image: radial-gradient(circle, rgba(16, 20, 26, 0.9), rgba(11, 12, 16, 1)), url('https://images.unsplash.com/photo-1509778233215-d912b32252a1?auto=format&fit=crop&q=80&w=2670');
+    background-image: radial-gradient(circle, rgba(16, 20, 26, 0.9), rgba(5, 5, 10, 1)), url('https://images.unsplash.com/photo-1509778233215-d912b32252a1?auto=format&fit=crop&q=80&w=2670');
     background-size: cover;
     background-attachment: fixed;
+    /* New: Adds subtle, animated background noise for a "digital screen" feel */
+    position: relative;
+    overflow-x: hidden;
 }
 
-/* Base Styles for glowing text */
+/* New: Subtle background animation for a dynamic, living feel */
+body::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="rgba(0,0,0,.1)"><rect width="100" height="100" fill="url(#patt)"/><defs><pattern id="patt" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.02)" /></pattern></defs></svg>');
+    animation: background-pulse 20s linear infinite;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* -- Text and Element Glows: More Nuance and Life -- */
 .section-heading, .logo-text, .glow-text {
-    text-shadow: 0 0 5px var(--glow-cyan), 0 0 10px var(--glow-cyan), 0 0 20px var(--glow-cyan), 0 0 40px var(--glow-cyan), 0 0 80px var(--glow-fuchsia);
-    filter: drop-shadow(0 0 2px var(--glow-cyan));
-    animation: glow-pulse 4s infinite ease-in-out;
+    /* More pronounced, layered shadow effect */
+    text-shadow: 0 0 8px var(--glow-cyan), 0 0 15px var(--glow-cyan), 0 0 30px var(--glow-cyan), 0 0 60px var(--glow-fuchsia), 0 0 120px var(--glow-fuchsia);
+    filter: drop-shadow(0 0 4px var(--glow-cyan));
+    animation: glow-pulse-2 6s infinite ease-in-out; /* Slower, more impactful pulse */
 }
 
-/* Button & interactive element styles */
+/* New: Hover effect for glow text to increase interactivity */
+.glow-text:hover {
+    text-shadow: 0 0 10px var(--glow-purple), 0 0 20px var(--glow-purple), 0 0 40px var(--glow-blue), 0 0 80px var(--glow-blue);
+    transition: text-shadow 0.5s ease-in-out;
+}
+
+/* -- Buttons and Interactive Elements: Elevated Polish -- */
 .btn-glow {
     @apply inline-block px-10 py-4 text-xl font-bold rounded-full transition duration-500 ease-in-out transform hover:scale-110;
     background: linear-gradient(90deg, var(--glow-cyan) 0%, var(--glow-blue) 100%);
     color: var(--bg-color);
     border: 2px solid var(--glow-cyan);
-    box-shadow: 0 0 10px var(--glow-cyan), 0 0 20px var(--glow-cyan), 0 0 30px var(--glow-cyan);
+    box-shadow: 0 0 15px var(--glow-cyan), 0 0 30px var(--glow-cyan), 0 0 45px var(--glow-cyan); /* Stronger shadow */
+    /* New: Animated border for a futuristic "power-up" effect */
+    position: relative;
+    overflow: hidden;
+}
+.btn-glow::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(transparent 0deg, var(--glow-fuchsia) 90deg, transparent 180deg);
+    animation: btn-border-glow 2s linear infinite;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+.btn-glow:hover::before {
+    opacity: 1;
 }
 
 .btn-secondary-glow {
@@ -38,17 +84,37 @@ body {
     color: var(--glow-fuchsia);
     border: 2px solid var(--glow-fuchsia);
     box-shadow: 0 0 10px var(--glow-fuchsia) inset, 0 0 20px var(--glow-fuchsia) inset;
+    /* New: Subtle flicker effect */
+    animation: flicker 2s infinite ease-in-out;
+}
+.btn-secondary-glow:hover {
+    box-shadow: 0 0 20px var(--glow-fuchsia) inset, 0 0 40px var(--glow-fuchsia) inset;
+    animation: none; /* Stop flicker on hover for a solid feel */
 }
 
-/* Card styles */
+/* -- Cards and Containers: Better Depth and Structure -- */
 .card-nebula {
     @apply bg-gray-900 bg-opacity-30 backdrop-blur-lg rounded-3xl shadow-2xl p-8 transform transition-transform duration-500 hover:scale-105;
     border: 2px solid transparent;
     border-image: linear-gradient(45deg, var(--glow-cyan), var(--glow-fuchsia));
     border-image-slice: 1;
+    position: relative;
+    /* New: Subtle pulsing border glow */
+    animation: border-pulse 4s infinite ease-in-out;
+}
+.card-nebula::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(45deg, var(--glow-cyan), var(--glow-fuchsia));
+    z-index: -1;
+    border-radius: 3rem;
+    filter: blur(8px);
+    opacity: 0.2;
+    animation: pulse-slow 6s infinite ease-in-out;
 }
 
-/* Form input styles */
+/* -- Forms: A more polished, integrated look -- */
 input, select, textarea {
     @apply shadow-inner appearance-none border-2 rounded w-full py-4 px-6 leading-tight focus:outline-none focus:ring-4 focus:ring-opacity-50;
     background-color: rgba(255, 255, 255, 0.05);
@@ -56,27 +122,44 @@ input, select, textarea {
     color: var(--text-primary);
     transition: all 0.3s ease;
 }
-
 input:focus, select:focus, textarea:focus {
     border-color: var(--glow-cyan);
     box-shadow: 0 0 10px var(--glow-cyan);
 }
 
-/* Specific animations */
-@keyframes glow-pulse {
-    0%, 100% {
-        text-shadow: 0 0 5px var(--glow-cyan), 0 0 10px var(--glow-cyan), 0 0 20px var(--glow-cyan), 0 0 40px var(--glow-cyan), 0 0 80px var(--glow-fuchsia);
-    }
-    50% {
-        text-shadow: 0 0 10px var(--glow-fuchsia), 0 0 20px var(--glow-fuchsia), 0 0 30px var(--glow-fuchsia), 0 0 50px var(--glow-blue), 0 0 100px var(--glow-blue);
-    }
-}
-
-.animate-pulse-slow {
-    animation: pulse-slow 6s infinite ease-in-out;
+/* -- Keyframe Animations: New and Improved -- */
+@keyframes glow-pulse-2 {
+    0%, 100% { text-shadow: 0 0 8px var(--glow-cyan), 0 0 15px var(--glow-cyan), 0 0 30px var(--glow-cyan), 0 0 60px var(--glow-fuchsia), 0 0 120px var(--glow-fuchsia); }
+    50% { text-shadow: 0 0 10px var(--glow-fuchsia), 0 0 20px var(--glow-fuchsia), 0 0 40px var(--glow-fuchsia), 0 0 80px var(--glow-blue), 0 0 150px var(--glow-blue); }
 }
 
 @keyframes pulse-slow {
     0%, 100% { transform: scale(1); opacity: 0.2; }
     50% { transform: scale(1.05); opacity: 0.4; }
+}
+
+@keyframes background-pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+@keyframes btn-border-glow {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes flicker {
+    0%, 100% { opacity: 1; }
+    5% { opacity: 0.95; }
+    10% { opacity: 1; }
+    15% { opacity: 0.9; }
+    20% { opacity: 1; }
+    25% { opacity: 0.98; }
+    30% { opacity: 1; }
+}
+
+@keyframes border-pulse {
+    0%, 100% { box-shadow: 0 0 5px var(--glow-cyan), 0 0 10px var(--glow-fuchsia); }
+    50% { box-shadow: 0 0 15px var(--glow-cyan), 0 0 30px var(--glow-fuchsia); }
 }
