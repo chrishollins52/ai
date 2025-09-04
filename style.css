@@ -1,131 +1,82 @@
-/* Custom styles for the Inter font and futuristic color scheme */
+:root {
+    --bg-color: #0b0c10;
+    --text-primary: #e0e0e0;
+    --glow-cyan: #00ffff;
+    --glow-fuchsia: #ff00ff;
+    --glow-blue: #007bff;
+}
+
 body {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Orbitron', sans-serif;
     scroll-behavior: smooth;
-    background-color: #1a1a2e; /* Deep Space Blue/Purple Background */
-    color: #e0e0e0; /* Light Gray text */
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    background-image: radial-gradient(circle, rgba(16, 20, 26, 0.9), rgba(11, 12, 16, 1)), url('https://images.unsplash.com/photo-1509778233215-d912b32252a1?auto=format&fit=crop&q=80&w=2670');
+    background-size: cover;
+    background-attachment: fixed;
 }
 
-/* Style for interactive buttons/links */
-.btn-primary {
-    @apply inline-block px-8 py-3 text-lg font-semibold text-white bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full shadow-lg hover:from-cyan-600 hover:to-blue-700 transition duration-300 ease-in-out transform hover:scale-105;
+/* Base Styles for glowing text */
+.section-heading, .logo-text, .glow-text {
+    text-shadow: 0 0 5px var(--glow-cyan), 0 0 10px var(--glow-cyan), 0 0 20px var(--glow-cyan), 0 0 40px var(--glow-cyan), 0 0 80px var(--glow-fuchsia);
+    filter: drop-shadow(0 0 2px var(--glow-cyan));
+    animation: glow-pulse 4s infinite ease-in-out;
 }
 
-.btn-secondary {
-    @apply inline-block px-8 py-3 text-lg font-semibold text-cyan-400 border-2 border-cyan-400 rounded-full hover:bg-cyan-900 hover:bg-opacity-20 transition duration-300 ease-in-out transform hover:scale-105;
+/* Button & interactive element styles */
+.btn-glow {
+    @apply inline-block px-10 py-4 text-xl font-bold rounded-full transition duration-500 ease-in-out transform hover:scale-110;
+    background: linear-gradient(90deg, var(--glow-cyan) 0%, var(--glow-blue) 100%);
+    color: var(--bg-color);
+    border: 2px solid var(--glow-cyan);
+    box-shadow: 0 0 10px var(--glow-cyan), 0 0 20px var(--glow-cyan), 0 0 30px var(--glow-cyan);
 }
 
-.section-heading {
-    @apply text-5xl font-extrabold text-white mb-6;
+.btn-secondary-glow {
+    @apply inline-block px-10 py-4 text-xl font-bold rounded-full transition duration-500 ease-in-out transform hover:scale-110;
+    background: transparent;
+    color: var(--glow-fuchsia);
+    border: 2px solid var(--glow-fuchsia);
+    box-shadow: 0 0 10px var(--glow-fuchsia) inset, 0 0 20px var(--glow-fuchsia) inset;
 }
 
-.card {
-    @apply bg-gray-900 bg-opacity-70 backdrop-blur-md rounded-xl shadow-lg p-8 transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl border border-gray-700;
+/* Card styles */
+.card-nebula {
+    @apply bg-gray-900 bg-opacity-30 backdrop-blur-lg rounded-3xl shadow-2xl p-8 transform transition-transform duration-500 hover:scale-105;
+    border: 2px solid transparent;
+    border-image: linear-gradient(45deg, var(--glow-cyan), var(--glow-fuchsia));
+    border-image-slice: 1;
 }
 
-/* Keyframes for animations */
-@keyframes fadeInDown {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
+/* Form input styles */
+input, select, textarea {
+    @apply shadow-inner appearance-none border-2 rounded w-full py-4 px-6 leading-tight focus:outline-none focus:ring-4 focus:ring-opacity-50;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+    transition: all 0.3s ease;
 }
 
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+input:focus, select:focus, textarea:focus {
+    border-color: var(--glow-cyan);
+    box-shadow: 0 0 10px var(--glow-cyan);
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+/* Specific animations */
+@keyframes glow-pulse {
+    0%, 100% {
+        text-shadow: 0 0 5px var(--glow-cyan), 0 0 10px var(--glow-cyan), 0 0 20px var(--glow-cyan), 0 0 40px var(--glow-cyan), 0 0 80px var(--glow-fuchsia);
+    }
+    50% {
+        text-shadow: 0 0 10px var(--glow-fuchsia), 0 0 20px var(--glow-fuchsia), 0 0 30px var(--glow-fuchsia), 0 0 50px var(--glow-blue), 0 0 100px var(--glow-blue);
+    }
 }
 
-@keyframes pulseSlow {
-    0%, 100% { transform: scale(1); opacity: 0.1; }
-    50% { transform: scale(1.2); opacity: 0.2; }
+.animate-pulse-slow {
+    animation: pulse-slow 6s infinite ease-in-out;
 }
 
-.animate-fade-in-down { animation: fadeInDown 1s ease-out forwards; }
-
-.animate-fade-in-up { animation: fadeInUp 1s ease-out forwards; animation-delay: 0.3s; }
-
-.animate-fade-in { animation: fadeIn 1s ease-out forwards; animation-delay: 0.6s; }
-
-.animate-pulse-slow { animation: pulseSlow 6s infinite ease-in-out; }
-
-/* Slideshow specific styles */
-.slideshow-container {
-    position: relative;
-    max-width: 800px;
-    margin: auto;
-    border-radius: 1rem; /* rounded-xl */
-    overflow: hidden;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-lg */
-    border: 1px solid #4a4a4a; /* border-gray-700 */
-}
-
-.mySlides {
-    display: none;
-}
-
-.mySlides img {
-    width: 100%;
-    display: block;
-    border-radius: 1rem; /* Inherit from container */
-}
-
-.prev, .next {
-    cursor: pointer;
-    position: absolute;
-    top: 50%;
-    width: auto;
-    padding: 16px;
-    margin-top: -22px;
-    color: white;
-    font-weight: bold;
-    font-size: 18px;
-    transition: 0.6s ease;
-    border-radius: 0 3px 3px 0;
-    user-select: none;
-    background-color: rgba(0, 0, 0, 0.5);
-}
-
-.next {
-    right: 0;
-    border-radius: 3px 0 0 3px;
-}
-
-.prev:hover, .next:hover {
-    background-color: rgba(0, 0, 0, 0.8);
-}
-
-.text-slide {
-    color: #f2f2f2;
-    font-size: 15px;
-    padding: 8px 12px;
-    position: absolute;
-    bottom: 8px;
-    width: 100%;
-    text-align: center;
-    background-color: rgba(0, 0, 0, 0.6);
-    border-radius: 0 0 1rem 1rem;
-}
-
-.dots-container {
-    text-align: center;
-    padding: 20px;
-}
-
-.dot {
-    cursor: pointer;
-    height: 15px;
-    width: 15px;
-    margin: 0 2px;
-    background-color: #bbb;
-    border-radius: 50%;
-    display: inline-block;
-    transition: background-color 0.6s ease;
-}
-
-.active-dot, .dot:hover {
-    background-color: #717171;
+@keyframes pulse-slow {
+    0%, 100% { transform: scale(1); opacity: 0.2; }
+    50% { transform: scale(1.05); opacity: 0.4; }
 }
