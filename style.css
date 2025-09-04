@@ -1,146 +1,63 @@
-/*
-================================================================================
-  FUTURISTIC GURU THEME - V2.0
-  Author: Gemini
-  Description: An advanced, cyberpunk-inspired theme with animated backgrounds,
-               neon glows, and enhanced microinteractions.
-================================================================================
-*/
-
-/*
-:root
-  - Defines global CSS variables for a consistent and easily customizable theme.
-  - Colors, fonts, and effects can be changed in one place.
-*/
-:root {
-    --bg-primary: #0d0d1a; /* Near-black space purple */
-    --bg-secondary: rgba(18, 18, 33, 0.7); /* Translucent dark blue for cards */
-    --text-primary: #e0e0e0;
-    --text-secondary: #a0a0c0;
-    --accent-cyan: #00f6ff;
-    --accent-magenta: #ff00c1;
-    --accent-blue: #3a7bd5;
-    --border-color: rgba(68, 76, 118, 0.5);
-    --glow-shadow: 0 0 5px var(--accent-cyan), 0 0 10px var(--accent-cyan), 0 0 20px var(--accent-blue);
-    --font-body: 'Inter', sans-serif;
-    --font-heading: 'Orbitron', 'Rajdhani', monospace; /* Futuristic display fonts */
-}
-
-/*
-Body & Background
-  - Sets the base font and smooth scrolling behavior.
-  - Creates a dynamic, animated "aurora" background using a pseudo-element.
-    This effect adds depth and a sense of a living interface.
-*/
+/* Custom styles for the Inter font and futuristic color scheme */
 body {
-    font-family: var(--font-body);
+    font-family: 'Inter', sans-serif;
     scroll-behavior: smooth;
-    background-color: var(--bg-primary);
-    color: var(--text-primary);
-    position: relative;
-    overflow-x: hidden;
+    background-color: #1a1a2e; /* Deep Space Blue/Purple Background */
+    color: #e0e0e0; /* Light Gray text */
 }
-
-body::before {
-    content: '';
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    background: 
-        radial-gradient(circle at 15% 25%, rgba(0, 246, 255, 0.2), transparent 40%),
-        radial-gradient(circle at 85% 75%, rgba(255, 0, 193, 0.2), transparent 40%);
-    animation: aurora-flow 25s infinite linear;
-}
-
-/*
-Interactive Elements: Buttons
-  - Buttons now feature animated gradients and glowing box shadows.
-  - The secondary button has a "powering up" effect with a gradient border.
-*/
-.btn-primary, .btn-secondary {
-    @apply inline-block px-8 py-3 text-lg font-semibold rounded-full transition-all duration-300 ease-in-out transform hover:scale-105;
-}
-
+/* Style for interactive buttons/links */
 .btn-primary {
-    color: white;
-    border: none;
-    background: linear-gradient(90deg, var(--accent-cyan), var(--accent-blue), var(--accent-magenta), var(--accent-cyan));
-    background-size: 300% 100%;
-    animation: gradient-flow 5s linear infinite;
-    box-shadow: 0 0 15px rgba(0, 246, 255, 0.4), 0 0 25px rgba(58, 123, 213, 0.3);
+    @apply inline-block px-8 py-3 text-lg font-semibold text-white bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full shadow-lg hover:from-cyan-600 hover:to-blue-700 transition duration-300 ease-in-out transform hover:scale-105;
 }
-.btn-primary:hover {
-    animation-play-state: paused;
-    box-shadow: 0 0 25px rgba(0, 246, 255, 0.7), 0 0 40px rgba(58, 123, 213, 0.5);
-}
-
 .btn-secondary {
-    color: var(--accent-cyan);
-    background-color: transparent;
-    border: 2px solid var(--accent-cyan);
-    box-shadow: 0 0 10px rgba(0, 246, 255, 0.3);
+    @apply inline-block px-8 py-3 text-lg font-semibold text-cyan-400 border-2 border-cyan-400 rounded-full hover:bg-cyan-900 hover:bg-opacity-20 transition duration-300 ease-in-out transform hover:scale-105;
 }
-.btn-secondary:hover {
-    color: white;
-    background-color: rgba(0, 246, 255, 0.15);
-    border-color: var(--accent-cyan);
-    box-shadow: var(--glow-shadow);
-}
-
-/*
-Typography & Headings
-  - Headings use a distinct futuristic font.
-  - A subtle text-shadow creates a "neon glow" effect, making text pop.
-*/
 .section-heading {
-    font-family: var(--font-heading);
-    @apply text-5xl font-extrabold mb-6;
-    background: linear-gradient(90deg, white, var(--accent-cyan));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-shadow: 0 0 10px rgba(0, 246, 255, 0.3);
+    @apply text-5xl font-extrabold text-white mb-6;
 }
-
-/*
-Glassmorphism Card
-  - Enhanced glass effect with a subtle gradient border.
-  - The border and glow intensify on hover for better user feedback.
-  - A 'clip-path' gives the card a modern, slightly asymmetrical shape.
-*/
 .card {
-    background-color: var(--bg-secondary);
-    backdrop-filter: blur(12px);
-    border: 1px solid var(--border-color);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-    @apply rounded-xl p-8 transform hover:scale-105;
-    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%);
+    @apply bg-gray-900 bg-opacity-70 backdrop-blur-md rounded-xl shadow-lg p-8 transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl border border-gray-700;
 }
-.card:hover {
-    border-color: var(--accent-cyan);
-    box-shadow: 0 0 20px rgba(0, 246, 255, 0.4);
+/* Keyframes for animations */
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+@keyframes pulseSlow {
+    0%, 100% { transform: scale(1); opacity: 0.1; }
+    50% { transform: scale(1.2); opacity: 0.2; }
+}
+.animate-fade-in-down { animation: fadeInDown 1s ease-out forwards; }
+.animate-fade-in-up { animation: fadeInUp 1s ease-out forwards; animation-delay: 0.3s; }
+.animate-fade-in { animation: fadeIn 1s ease-out forwards; animation-delay: 0.6s; }
+.animate-pulse-slow { animation: pulseSlow 6s infinite ease-in-out; }
 
-/*
-================================================================================
-  SPECIFIC COMPONENT STYLES
-================================================================================
-*/
-
-/* Slideshow Styles */
+/* Slideshow specific styles */
 .slideshow-container {
     position: relative;
     max-width: 800px;
     margin: auto;
-    border-radius: 1rem;
+    border-radius: 1rem; /* rounded-xl */
     overflow: hidden;
-    border: 2px solid var(--border-color);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-lg */
+    border: 1px solid #4a4a4a; /* border-gray-700 */
 }
-.mySlides { display: none; }
-.mySlides img { width: 100%; display: block; border-radius: 1rem; }
+.mySlides {
+    display: none;
+}
+.mySlides img {
+    width: 100%;
+    display: block;
+    border-radius: 1rem; /* Inherit from container */
+}
 .prev, .next {
     cursor: pointer;
     position: absolute;
@@ -152,158 +69,42 @@ Glassmorphism Card
     font-weight: bold;
     font-size: 18px;
     transition: 0.6s ease;
-    border-radius: 50%;
-    width: 50px; height: 50px;
-    display: flex; align-items: center; justify-content: center;
+    border-radius: 0 3px 3px 0;
     user-select: none;
     background-color: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(5px);
 }
-.prev { left: 10px; }
-.next { right: 10px; }
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
 .prev:hover, .next:hover {
-    background-color: var(--accent-cyan);
-    color: var(--bg-primary);
-    text-shadow: none;
+    background-color: rgba(0, 0, 0, 0.8);
 }
 .text-slide {
     color: #f2f2f2;
     font-size: 15px;
-    padding: 12px;
+    padding: 8px 12px;
     position: absolute;
-    bottom: 0;
+    bottom: 8px;
     width: 100%;
     text-align: center;
-    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    background-color: rgba(0, 0, 0, 0.6);
     border-radius: 0 0 1rem 1rem;
 }
-.dots-container { text-align: center; padding: 20px; }
+.dots-container {
+    text-align: center;
+    padding: 20px;
+}
 .dot {
     cursor: pointer;
-    height: 12px;
-    width: 12px;
-    margin: 0 5px;
-    background-color: var(--border-color);
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbb;
     border-radius: 50%;
     display: inline-block;
-    transition: all 0.4s ease;
-    border: 2px solid transparent;
+    transition: background-color 0.6s ease;
 }
 .active-dot, .dot:hover {
-    background-color: var(--accent-cyan);
-    transform: scale(1.2);
-    border-color: var(--text-primary);
+    background-color: #717171;
 }
-
-/* Modal Styles */
-.modal-overlay {
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background-color: rgba(10, 10, 20, 0.8);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    backdrop-filter: blur(8px);
-    animation: fadeIn 0.5s ease-out forwards;
-}
-.modal-content {
-    background-color: var(--bg-primary);
-    padding: 2rem;
-    border-radius: 1rem;
-    max-width: 600px;
-    width: 90%;
-    border: 1px solid var(--accent-cyan);
-    box-shadow: 0 0 30px rgba(0, 246, 255, 0.5);
-    position: relative;
-    animation: fadeInUp 0.5s ease-out forwards;
-}
-.modal-close-btn {
-    position: absolute;
-    top: 1rem; right: 1rem;
-    background: none; border: none;
-    color: var(--text-secondary);
-    font-size: 1.5rem;
-    cursor: pointer;
-    transition: color 0.3s, transform 0.3s;
-}
-.modal-close-btn:hover {
-    color: var(--accent-cyan);
-    transform: rotate(90deg);
-}
-
-/* Toast Notification Styles */
-#toast-notification {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%) translateY(50px);
-    color: white;
-    padding: 12px 24px;
-    border-radius: 9999px;
-    z-index: 1001;
-    opacity: 0;
-    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    border: 1px solid var(--accent-cyan);
-    background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan));
-    box-shadow: var(--glow-shadow);
-}
-#toast-notification.show {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-}
-
-/* Health Meter Style */
-.health-meter-container {
-    @apply w-full bg-gray-900 rounded-full h-8 border-2 overflow-hidden;
-    border-color: var(--border-color);
-}
-.health-meter-bar {
-    @apply h-full rounded-full text-center text-white font-bold flex items-center justify-center transition-all duration-1000 ease-out;
-    background: linear-gradient(90deg, var(--accent-magenta), var(--accent-cyan));
-    box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
-    animation: pulseSlow 4s infinite ease-in-out;
-}
-
-/*
-================================================================================
-  KEYFRAME ANIMATIONS
-  - Defines the animations used throughout the theme.
-================================================================================
-*/
-
-@keyframes aurora-flow {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-@keyframes gradient-flow {
-    0% { background-position: 0% 50%; }
-    100% { background-position: 100% 50%; }
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes fadeInDown {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes pulseSlow {
-    0%, 100% { box-shadow: 0 0 5px var(--accent-cyan), 0 0 10px var(--accent-cyan); }
-    50% { box-shadow: 0 0 15px var(--accent-cyan), 0 0 25px var(--accent-cyan); }
-}
-
-/* Helper Classes for triggering animations */
-.animate-fade-in-down { animation: fadeInDown 1s ease-out forwards; }
-.animate-fade-in-up { animation: fadeInUp 1s ease-out forwards; animation-delay: 0.3s; }
-.animate-fade-in { animation: fadeIn 1s ease-out forwards; animation-delay: 0.6s; }
