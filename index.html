@@ -1,8 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>My Website</title>
-    <link rel="stylesheet" href="styles.css"> </head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wave Guru - Out of This World Waves</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+</head>
 <body>
 
     <header class="bg-gray-800 shadow-lg">
@@ -137,76 +142,4 @@
                     <h4 class="glow-text text-xl font-bold">Waver 4</h4>
                     <p class="text-gray-400">Team: The Gauntlet</p>
                 </div>
-                <div class="card-nebula text-center cursor-pointer" onclick="showWaverDetails(5)">
-                    <h4 class="glow-text text-xl font-bold">Waver 5</h4>
-                    <p class="text-gray-400">Team: Wave Chasers</p>
-                </div>
-                <div class="card-nebula text-center cursor-pointer" onclick="showWaverDetails(6)">
-                    <h4 class="glow-text text-xl font-bold">Waver 6</h4>
-                    <p class="text-gray-400">Team: Master Combers</p>
-                </div>
-                <div class="card-nebula text-center cursor-pointer" onclick="showWaverDetails(7)">
-                    <h4 class="glow-text text-xl font-bold">Waver 7</h4>
-                    <p class="text-gray-400">Team: Spiral Kings</p>
-                </div>
-                <div class="card-nebula text-center cursor-pointer" onclick="showWaverDetails(8)">
-                    <h4 class="glow-text text-xl font-bold">Waver 8</h4>
-                    <p class="text-gray-400">Team: The Unravelers</p>
-                </div>
-                <div class="card-nebula text-center cursor-pointer" onclick="showWaverDetails(9)">
-                    <h4 class="glow-text text-xl font-bold">Waver 9</h4>
-                    <p class="text-gray-400">Team: Deep Tides</p>
-                </div>
-                <div class="card-nebula text-center cursor-pointer" onclick="showWaverDetails(10)">
-                    <h4 class="glow-text text-xl font-bold">Waver 10</h4>
-                    <p class="text-gray-400">Team: The Monarchs</p>
-                </div>
-            </div>
-        </section>
-   
-        <section id="products" class="card-nebula">
-            <h2 class="section-heading text-3xl font-bold text-center mb-6">Our Premium Brushes 🪮</h2>
-            <p class="text-center text-gray-300 mb-6">Invest in the right tools for your waves.</p>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="card-nebula text-center">
-                    <h3 class="glow-text text-xl font-bold">The Hard Bristle Brush</h3>
-                    <p class="text-gray-400 mt-2">Perfect for coarse hair, designed for maximum pull.</p>
-                    <button onclick="purchaseBrush('Hard Bristle Brush')" class="btn-glow mt-4">Add to Cart</button>
-                </div>
-                <div class="card-nebula text-center">
-                    <h3 class="glow-text text-xl font-bold">The Medium Bristle Brush</h3>
-                    <p class="text-gray-400 mt-2">The all-purpose tool for most wave patterns.</p>
-                    <button onclick="purchaseBrush('Medium Bristle Brush')" class="btn-glow mt-4">Add to Cart</button>
-                </div>
-                <div class="card-nebula text-center">
-                    <h3 class="glow-text text-xl font-bold">The Soft Bristle Brush</h3>
-                    <p class="text-gray-400 mt-2">Ideal for laying down frizz and adding shine.</p>
-                    <button onclick="purchaseBrush('Soft Bristle Brush')" class="btn-glow mt-4">Add to Cart</button>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <div id="waverModal" class="modal hidden">
-        <div class="modal-content text-center">
-            <button onclick="closeModal('waverModal')" class="absolute top-4 right-4 text-gray-400 hover:text-gray-200 transition-colors">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                </svg>
-            </button>
-            <h3 id="waverName" class="glow-text text-2xl font-bold mb-2"></h3>
-            <p id="waverTeam" class="text-gray-300 mb-1"></p>
-            <p id="waverOrigin" class="text-gray-300"></p>
-        </div>
-    </div>
-
-    <div id="toast-notification" class="toast"></div>
-
-    <footer class="bg-gray-800 text-gray-400 text-center py-6 mt-12">
-        <p>&copy; 2025 Wave Guru. All rights reserved.</p>
-    </footer>
-
-    <script src="script.js"></script>
-</body>
-</html>
+                <div class="card-nebula text-center cursor-pointer
