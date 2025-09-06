@@ -1,100 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Amazing Website - Modern & Clean</title>
-<link rel="stylesheet" href="style.css">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wave Guru - The Ultimate Wave Community</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
-<body>
+<body class="bg-gray-900 text-gray-100 font-roboto antialiased overflow-x-hidden">
 
-<header>
-<div class="container">
-<h1 class="logo">Amazing Website</h1>
-<nav>
-<ul>
-<li><a href="#hero">Home</a></li>
-<li><a href="#features">Features</a></li>
-<li><a href="#content">Services</a></li>
-<li><a href="#cta">Contact</a></li>
-</ul>
-</nav>
-</div>
-</header>
+    <header class="bg-gray-900 sticky top-0 z-50 transition-all duration-300 shadow-lg" id="site-header">
+        <nav class="container mx-auto flex items-center justify-between py-4 px-6 md:px-0">
+            <a href="#" class="text-3xl font-poppins font-bold text-cyan-400">Wave Guru</a>
+            <div class="hidden md:flex space-x-8 items-center font-poppins">
+                <a href="#ask-guru" class="nav-link">Ask Guru AI</a>
+                <a href="#planner" class="nav-link">Journey Planner</a>
+                <a href="#community" class="nav-link">Community</a>
+                <a href="#gauntlet" class="nav-link">The Gauntlet</a>
+                <a href="#products" class="nav-link">Products</a>
+            </div>
+            <div class="md:hidden">
+                <button id="mobile-menu-btn" class="text-gray-300 focus:outline-none">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-800 py-4">
+            <ul class="flex flex-col items-center space-y-4 font-poppins">
+                <li><a href="#ask-guru" class="mobile-menu-link text-gray-200 block py-2">Ask Guru AI</a></li>
+                <li><a href="#planner" class="mobile-menu-link text-gray-200 block py-2">Journey Planner</a></li>
+                <li><a href="#community" class="mobile-menu-link text-gray-200 block py-2">Community</a></li>
+                <li><a href="#gauntlet" class="mobile-menu-link text-gray-200 block py-2">The Gauntlet</a></li>
+                <li><a href="#products" class="mobile-menu-link text-gray-200 block py-2">Products</a></li>
+            </ul>
+        </div>
+    </header>
 
-<section id="hero" class="hero-bg">
-<div class="container">
-<div class="hero-content">
-<h2>Crafting Digital Experiences That Matter</h2>
-<p>We are a creative agency dedicated to building beautiful and functional websites that captivate your audience.</p>
-<a href="#cta" class="button">Get Started Now</a>
-</div>
-</div>
-</section>
+    <main class="space-y-24">
 
-<section id="features">
-<div class="container">
-<h2 class="section-title">Our Core Strengths</h2>
-<div class="features-grid">
-<div class="feature-item">
-<i class="fas fa-desktop icon"></i>
-<h3>Responsive Design</h3>
-<p>We ensure your website looks flawless on any device, from desktops to smartphones.</p>
-</div>
-<div class="feature-item">
-<i class="fas fa-cogs icon"></i>
-<h3>Custom Development</h3>
-<p>Tailored solutions built from the ground up to meet your unique business needs.</p>
-</div>
-<div class="feature-item">
-<i class="fas fa-lightbulb icon"></i>
-<h3>Innovative Ideas</h3>
-<p>Our team brings fresh, creative thinking to every project to help you stand out.</p>
-</div>
-</div>
-</div>
-</section>
+        <section id="hero" class="relative overflow-hidden py-32 md:py-48 text-center bg-gray-800">
+            <div class="absolute inset-0 bg-cover bg-center opacity-30" style="background-image: url('wave-hero-bg.jpg');"></div>
+            <div class="relative z-10 container mx-auto px-6">
+                <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-4 leading-tight">Master Your Waves. <br class="hidden md:inline">Unleash Your Shine.</h1>
+                <p class="text-lg md:text-xl text-gray-300 mb-8 max-w-2xl mx-auto">Your ultimate resource for wave tutorials, community wisdom, and the tools you need to succeed.</p>
+                <a href="#ask-guru" class="button-modern">Ask Guru AI</a>
+            </div>
+        </section>
 
-<section id="content">
-<div class="container">
-<h2 class="section-title">Our Services</h2>
-<div class="content-items">
-<div class="content-item">
-<img src="https://via.placeholder.com/400x300.png?text=Web+Design" alt="A laptop screen showing a web design layout.">
-<h3>Web Design</h3>
-<p>From wireframes to full-scale design, we create intuitive and visually stunning user interfaces.</p>
-</div>
-<div class="content-item">
-<img src="https://via.placeholder.com/400x300.png?text=App+Development" alt="A person holding a smartphone showing a mobile app.">
-<h3>App Development</h3>
-<p>Building high-performance and scalable mobile applications for iOS and Android.</p>
-</div>
-<div class="content-item">
-<img src="https://via.placeholder.com/400x300.png?text=SEO+Marketing" alt="A magnifying glass over a search engine results page.">
-<h3>SEO & Marketing</h3>
-<p>Drive organic traffic and grow your online presence with our comprehensive SEO strategies.</p>
-</div>
-</div>
-</div>
-</section>
+        <section id="ask-guru" class="container mx-auto px-6" data-aos="fade-up">
+            <h2 class="section-heading">Ask the Guru AI 🧠</h2>
+            <p class="section-subheading">Got a wave question? Type it in and get instant wisdom.</p>
+            <form id="main-ask-guru-form" class="flex flex-col md:flex-row gap-4 max-w-3xl mx-auto">
+                <input type="text" id="main-ai-question" placeholder="e.g., How do I fix forks? or How to get more shine?" class="input-field">
+                <button type="submit" class="button-primary">Ask Guru</button>
+            </form>
+            <div id="main-ai-response-container" class="card-advanced mt-8 hidden">
+                <p id="main-ai-response" class="text-lg text-gray-200 text-center"></p>
+            </div>
+            <div id="main-ai-loading-indicator" class="hidden text-center mt-8">
+                <div class="loading-spinner"></div>
+                <p class="mt-2 text-cyan-400">Thinking...</p>
+            </div>
+        </section>
 
-<section id="cta">
-<div class="container text-center">
-<h2 class="section-title">Ready to Start Your Project?</h2>
-<p>Get in touch with us today to discuss your ideas and get a free quote.</p>
-<a href="#" class="button button-lg">Contact Us</a>
-</div>
-</section>
-
-<footer>
-<div class="container">
-<p>&copy; 2023 Amazing Website. All rights reserved.</p>
-</div>
-</footer>
-
-</body>
-</html>
+        <section id="why-us" class="container mx-auto px-6" data-aos="fade-up">
+            <h2 class="section-heading">Why Choose Wave Guru?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="card-advanced text-center">
+                    <i class="fas
