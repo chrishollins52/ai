@@ -47,7 +47,7 @@ const mainAiResponseContainer = document.getElementById('main-ai-response-contai
 const mainAiResponseDiv = document.getElementById('main-ai-response');
 const mainAiLoadingIndicator = document.getElementById('main-ai-loading-indicator');
 
-// This entire block has been updated with the correct API information.
+// UPDATED: This block now calls a secure backend endpoint
 mainAskGuruForm.addEventListener('submit', async function(e) {
     e.preventDefault();
     const question = mainAiQuestionInput.value.trim();
@@ -58,41 +58,29 @@ mainAskGuruForm.addEventListener('submit', async function(e) {
     mainAiLoadingIndicator.classList.remove('hidden');
     mainAiResponseContainer.classList.add('hidden');
 
-    // **API Key from your console**
-    const apiKey = 'AIzaSyDZVzNeFqZFznLWiSHlplGCrNo8o1cs91I'; 
+    // **IMPORTANT:** Replace this with the URL of your deployed Google Cloud Function
+    const cloudFunctionUrl = 'YOUR_GOOGLE_CLOUD_FUNCTION_URL';
     
-    // **API Endpoint from your curl command**
-    const apiUrl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
-
     try {
-        const response = await fetch(apiUrl, {
+        const response = await fetch(cloudFunctionUrl, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                // The API key is passed in the header, as shown in the curl command.
-                'X-goog-api-key': apiKey
             },
             body: JSON.stringify({
-                // The request body matches the format required by the Gemini API.
-                contents: [{
-                    parts: [{
-                        text: question
-                    }]
-                }]
+                // The request body contains the user's question, which is sent to your backend function.
+                question: question
             })
         });
 
         if (!response.ok) {
-            // Log the full error to the console for easier debugging
             const errorDetails = await response.text();
             console.error('API request failed:', response.status, errorDetails);
             throw new Error(`HTTP error! status: ${response.status}`);
         }
 
         const data = await response.json();
-        
-        // This is the correct path to extract the text from the Gemini API response.
-        const aiResponse = data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts && data.candidates[0].content.parts[0] ? data.candidates[0].content.parts[0].text : "No response found.";
+        const aiResponse = data.response; // Assuming your cloud function returns a 'response' field.
 
         mainAiResponseDiv.textContent = aiResponse;
 
@@ -215,3 +203,6 @@ function purchaseBrush(productName) {
 }
 
 window.purchaseBrush = purchaseBrush;
+
+// *** IMPORTANT: You will need to create and deploy the Google Cloud Function that this code calls. ***
+// For a step-by-step guide on how to set up the Google Cloud Function and Dialogflow, check out this video.
